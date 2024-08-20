@@ -3,44 +3,90 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="Author" content="João Dias"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="public/css/vendas.css" />
+        <link rel="stylesheet" href="public/script.js" />
 
         <title>Vendas</title>
     </head>
 
-    <body>
-        <main>
-            <h1><strong>Vendas</strong></h1>
-            <section>
-                <h3><strong>Tabela de Vendas</strong></h3>
-                <table class="table" >
-                    <tr>
-                      <th><strong>Produtos</strong></th>
-                      <th><strong>Preços</strong></th>
-                      <th><strong>Codigo</strong></th>
-                    </tr>
-                    <tr>
-                      <td>Maçã</td>
-                      <td>3,00</td>
-                      <td>01</td>
-                    </tr>
-                    <tr>
-                      <td>Banana</td>
-                      <td>1,50</td>
-                      <td>02</td>
-                    </tr>
-                    <tr>
-                        <td>Laranja</td>
-                        <td>2,00</td>
-                        <td>03</td>
-                    </tr>
-                    <tr>
-                        <td>Uva</td>
-                        <td>4,00</td>
-                        <td>04</td>
-                    </tr>
-                </table>
-            </section>
-        </main>
-    </body>
+    <script>
+        function registrarVendas() {
+            // Preços das frutas
+            const precos = {
+                'maçãs': 3.00,
+                'bananas': 1.50,
+                'laranjas': 2.00,
+                'uvas': 4.00,
+            };
+
+            const frutas = Object.keys(precos);
+            let totalVendas = 0;
+            let totalFrutas = 0;
+            // Loop para quantidade vendida
+            for (let fruta of frutas) {
+                let quantidade = prompt(`Quantas ${fruta} você vendeu?`);
+               // Verifica se a entrada não é igual a 0
+                if (quantidade !== null && !isNaN(quantidade) && quantidade.trim() !== '') {
+                    quantidade = parseInt(quantidade, 10);
+                    totalFrutas += quantidade;
+                    totalVendas += quantidade * precos[fruta];
+                } else {
+                    alert(`Entrada inválida para ${fruta}.`);
+                }
+            }
+            // Aplica os descontos
+            if (totalVendas > 50) {
+                totalVendas *= 0.90; // Aplica 10% de desconto
+            }
+            
+            if (totalFrutas > 20) {
+                totalVendas -= 5.00; // Aplicar um desconto de adicional de R$ 5,00 reais
+            }
+            // So para garantir que o total não fique negativo
+            totalVendas = Math.max(totalVendas, 0);
+
+            // Exibe o valor total depois dos descontos 
+            alert(`O total de vendas após os descontos é: R$ ${totalVendas.toFixed(2)}`);
+        }
+    </script>
+        <body>
+            <main>
+                <h1><strong>Vendas</strong></h1>
+                <section>
+                    <h2>Controle de Vendas de Frutas</h2>
+                        <button onclick="registrarVendas()">Registrar Vendas</button>
+                    <h3><strong>Tabela de Vendas</strong></h3>
+                    <table class="table">
+                        <tr>
+                          <th><strong>Produtos</strong></th>
+                          <th><strong>Preços</strong></th>
+                          <th><strong>Codigo</strong></th>
+                        </tr>
+                        <tr>
+                          <td>Maçã</td>
+                          <td>3,00</td>
+                          <td>01</td>
+                        </tr>
+                        <tr>
+                          <td>Banana</td>
+                          <td>1,50</td>
+                          <td>02</td>
+                        </tr>
+                        <tr>
+                            <td>Laranja</td>
+                            <td>2,00</td>
+                            <td>03</td>
+                        </tr>
+                        <tr>
+                            <td>Uva</td>
+                            <td>4,00</td>
+                            <td>04</td>
+                        </tr>
+                    </table>
+                </section>
+            </main>
+        </body>
 </html>                      
+            
+   
